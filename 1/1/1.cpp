@@ -84,11 +84,9 @@ int main()
 	
 	string nm;
 
-
-
-	//int a1, a2, a3;
-
 	const int k = 25;
+
+
 
 	Auto Cars[k];
 
