@@ -1,6 +1,7 @@
 ﻿#include "pch.h"
 #include <iostream>
 #include <windows.h>
+#include <string>
 using namespace std;
 
 struct stationary_telephone
@@ -23,37 +24,37 @@ void check(stationary_telephone* user, int n)
 {
 	for (int i = n-1; i <= n-1; i++)
 	{
-		if (96 < int(user[i].second_name[0]) && int(user[i].second_name[0]) < 123 || 
+		if (96 < int(user[i].second_name[0]) && int(user[i].second_name[0]) < 123 ||
 			-33 < int(user[i].second_name[0]) && int(user[i].second_name[0]) < 0)
-			user[i].second_name[0] = int(user[i].second_name[0]) - 32;
+			user[i].second_name[0] -= 32;
 
 		if (96 < int(user[i].name[0]) && int(user[i].name[0]) < 123 ||
 			-33 < int(user[i].name[0]) && int(user[i].name[0]) < 0)
-			user[i].name[0] = int(user[i].name[0]) - 32;
+			user[i].name[0] -= 32;
 
 		if (96 < int(user[i].middle_name[0]) && int(user[i].middle_name[0]) < 123 ||
 			-33 < int(user[i].middle_name[0]) && int(user[i].middle_name[0]) < 0)
-			user[i].middle_name[0] = int(user[i].middle_name[0]) - 32;
+			user[i].middle_name[0] -= 32;
 
 		if (96 < int(user[i].country[0]) && int(user[i].country[0]) < 123 ||
 			-33 < int(user[i].country[0]) && int(user[i].country[0]) < 0)
-			user[i].country[0] = int(user[i].country[0]) - 32;
+			user[i].country[0] -= 32;
 
 		if (96 < int(user[i].region[0]) && int(user[i].region[0]) < 123 ||
 			-33 < int(user[i].region[0]) && int(user[i].region[0]) < 0)
-			user[i].region[0] = int(user[i].region[0]) - 32;
+			user[i].region[0] -= 32;
 
 		if (96 < int(user[i].area[0]) && int(user[i].area[0]) < 123 ||
 			-33 < int(user[i].area[0]) && int(user[i].area[0]) < 0)
-			user[i].area[0] = int(user[i].area[0]) - 32;
+			user[i].area[0] -= 32;
 
 		if (96 < int(user[i].city[0]) && int(user[i].city[0]) < 123 ||
 			-33 < int(user[i].city[0]) && int(user[i].city[0]) < 0)
-			user[i].city[0] = int(user[i].city[0]) - 32;
+			user[i].city[0] -= 32;
 
 		if (96 < int(user[i].street[0]) && int(user[i].street[0]) < 123 ||
 			-33 < int(user[i].street[0]) && int(user[i].street[0]) < 0)
-			user[i].street[0] = int(user[i].street[0]) - 32;
+			user[i].street[0] -= 32;
 	}
 }
 
@@ -233,14 +234,26 @@ void Find(stationary_telephone* user, int choise)
 
 int main()
 {
+// Возможность русского ввода
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
 	setlocale(LC_ALL, "ru");
 
+	string s;
 	int n = 0, choise = 0;
 
 	cout << "Введите размер базы: ";
-	cin >> n;
+	cin >> s;
+
+// Проверка на ввод корректных данных
+
+	while (atoi(s.c_str()) <= 0)
+	{
+		cout << "Некорректыне данные! Попробуйте еще раз ";
+		cin >> s;
+	}
+
+	n = atoi(s.c_str());
 
 	stationary_telephone* user = new stationary_telephone[n];
 
