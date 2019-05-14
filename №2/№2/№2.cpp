@@ -6,56 +6,50 @@ using namespace std;
 
 struct stationary_telephone
 {
-	char second_name[20];
-	char name[20];
-	char middle_name[20];
-	char country[20];
-	char region[20];
-	char area[20];
-	char city[20];
-	char street[20];
-	int house;
-	int door;
-	int telephone;
+	string second_name = "\0";
+	string name = "\0";
+	string middle_name = "\0";
+	string country = "\0";
+	string region = "\0";
+	string area = "\0";
+	string city = "\0";
+	string street = "\0";
+	int house = 0;
+	int door = 0;
+	int telephone = 0;
 };
 
 	// Проверка на наличие маленьких букв в начале (поддержка русского и английского языка)
-void check(stationary_telephone* user, int n)
+char checkRegister(int n, char s)
 {
-	for (int i = n-1; i <= n-1; i++)
+		if (96 < int(s) && int(s) < 123 ||
+			-33 < int(s) && int(s) < 0)
+			s -= 32;
+		return s;
+}
+	// Проверка на корректный ввод для типа string и int
+string check(string s)
+{
+	if (s == "string")
 	{
-		if (96 < int(user[i].second_name[0]) && int(user[i].second_name[0]) < 123 ||
-			-33 < int(user[i].second_name[0]) && int(user[i].second_name[0]) < 0)
-			user[i].second_name[0] -= 32;
-
-		if (96 < int(user[i].name[0]) && int(user[i].name[0]) < 123 ||
-			-33 < int(user[i].name[0]) && int(user[i].name[0]) < 0)
-			user[i].name[0] -= 32;
-
-		if (96 < int(user[i].middle_name[0]) && int(user[i].middle_name[0]) < 123 ||
-			-33 < int(user[i].middle_name[0]) && int(user[i].middle_name[0]) < 0)
-			user[i].middle_name[0] -= 32;
-
-		if (96 < int(user[i].country[0]) && int(user[i].country[0]) < 123 ||
-			-33 < int(user[i].country[0]) && int(user[i].country[0]) < 0)
-			user[i].country[0] -= 32;
-
-		if (96 < int(user[i].region[0]) && int(user[i].region[0]) < 123 ||
-			-33 < int(user[i].region[0]) && int(user[i].region[0]) < 0)
-			user[i].region[0] -= 32;
-
-		if (96 < int(user[i].area[0]) && int(user[i].area[0]) < 123 ||
-			-33 < int(user[i].area[0]) && int(user[i].area[0]) < 0)
-			user[i].area[0] -= 32;
-
-		if (96 < int(user[i].city[0]) && int(user[i].city[0]) < 123 ||
-			-33 < int(user[i].city[0]) && int(user[i].city[0]) < 0)
-			user[i].city[0] -= 32;
-
-		if (96 < int(user[i].street[0]) && int(user[i].street[0]) < 123 ||
-			-33 < int(user[i].street[0]) && int(user[i].street[0]) < 0)
-			user[i].street[0] -= 32;
+		cin >> s;
+		while (!atoi(s.c_str()) <= 0)
+		{
+			cout << "Некорректыне данные! Попробуйте еще раз ";
+			cin >> s;
+		}
 	}
+
+	if (s == "int")
+	{
+		cin >> s;
+		while (atoi(s.c_str()) <= 0)
+		{
+			cout << "Некорректыне данные! Попробуйте еще раз ";
+			cin >> s;
+		}
+	}
+	return s;
 }
 
 	// Ввод базы
@@ -64,41 +58,47 @@ void Input(int n, stationary_telephone* user)
 	for (int i = 0; i < n; i++)
 	{
 		cout << endl << endl << "\tПользователь №" << i + 1 << endl;
-
+		
 		cout << "Фамилия: ";
-		cin >> user[i].second_name;
+		user[i].second_name = check("string");
+		user[i].second_name[0] = checkRegister(n, user[i].second_name[0]);
 
 		cout << "Имя: ";
-		cin >> user[i].name;
-		
+		user[i].name = check("string");
+		user[i].name[0] = checkRegister(n, user[i].name[0]);
+
 		cout << "Отчество: ";
-		cin >> user[i].middle_name;
-		
+		user[i].middle_name = check("string");
+		user[i].middle_name[0] = checkRegister(n, user[i].middle_name[0]);
+
 		cout << "Страна: ";
-		cin >> user[i].country;
+		user[i].country = check("string");
+		user[i].country[0] = checkRegister(n, user[i].country[0]);
 
 		cout << "Регион: ";
-		cin >> user[i].region;
+		user[i].region = check("string");
+		user[i].region[0] = checkRegister(n, user[i].region[0]);
 
 		cout << "Район: ";
-		cin >> user[i].area;
+		user[i].area = check("string");
+		user[i].area[0] = checkRegister(n, user[i].area[0]);
 
 		cout << "Город: ";
-		cin >> user[i].city;
+		user[i].city = check("string");
+		user[i].city[0] = checkRegister(n, user[i].city[0]);
 
 		cout << "Улица: ";
-		cin >> user[i].street;
+		user[i].street = check("string");
+		user[i].street[0] = checkRegister(n, user[i].street[0]);
 
 		cout << "Дом: ";
-		cin >> user[i].house;
+		user[i].house = atoi(check("int").c_str());
 
 		cout << "Квартира: ";
-		cin >> user[i].door;
+		user[i].door = atoi(check("int").c_str());
 
 		cout << "Номер телефона: ";
-		cin >> user[i].telephone;
-		
-		check(user, n);
+		user[i].telephone = atoi(check("int").c_str());
 	}
 }
 
@@ -145,50 +145,45 @@ void Output(int n, stationary_telephone* user)
 }
 
 	// Увеличение базы
-void Resize(int n, stationary_telephone* user, int choise)
+void Resize(int n, stationary_telephone* changeUser, stationary_telephone* user, int choise)
 {
+	for (int i = 0; i < n; i++)
+	{
+		changeUser[i].second_name = user[i].second_name;
+
+		changeUser[i].name = user[i].name;
+
+		changeUser[i].middle_name = user[i].middle_name;
+
+		changeUser[i].country = user[i].country;
+
+		changeUser[i].region = user[i].region;
+
+		changeUser[i].area = user[i].area;
+
+		changeUser[i].city = user[i].city;
+
+		changeUser[i].street = user[i].street;
+
+		changeUser[i].house = user[i].house;
+
+		changeUser[i].door = user[i].door;
+
+		changeUser[i].telephone = user[i].telephone;
+	}
+
 	for (int i = n; i < choise; i++)
 	{
 		cout << endl << endl << "\tПользователь №" << i + 1 << endl;
-
+		
 		cout << "Фамилия: ";
-		cin >> user[i].second_name;
+		changeUser[i].second_name = check("string");
+		changeUser[i].second_name[0] = checkRegister(n, changeUser[i].second_name[0]);
 
 		cout << "Имя: ";
-		cin >> user[i].name;
-
-		cout << "Отчество: ";
-		cin >> user[i].middle_name;
-
-		cout << "Страна: ";
-		cin >> user[i].country;
-
-		cout << "Регион: ";
-		cin >> user[i].region;
-
-		cout << "Район: ";
-		cin >> user[i].area;
-
-		cout << "Город: ";
-		cin >> user[i].city;
-
-		cout << "Улица: ";
-		cin >> user[i].street;
-
-		cout << "Дом: ";
-		cin >> user[i].house;
-
-		cout << "Квартира: ";
-		cin >> user[i].door;
-
-		cout << "Номер телефона: ";
-		cin >> user[i].telephone;
+		changeUser[i].name = check("string");
+		changeUser[i].name[0] = checkRegister(n, changeUser[i].name[0]);
 	}
-
-	choise -= n;
-	n += choise;
-
-	check(user, n);
 }
 
 	// Нахождения элемента/пользователя базы
@@ -239,21 +234,12 @@ int main()
 	SetConsoleOutputCP(1251);
 	setlocale(LC_ALL, "ru");
 
-	string s;
 	int n = 0, choise = 0;
 
 	cout << "Введите размер базы: ";
-	cin >> s;
 
 // Проверка на ввод корректных данных
-
-	while (atoi(s.c_str()) <= 0)
-	{
-		cout << "Некорректыне данные! Попробуйте еще раз ";
-		cin >> s;
-	}
-
-	n = atoi(s.c_str());
+	n = atoi(check("int").c_str());
 
 	stationary_telephone* user = new stationary_telephone[n];
 
@@ -268,9 +254,12 @@ int main()
 		cout << "Сколько пользователей хотите добавить? ";
 		cin >> choise;
 		choise += n;
-		Resize(n, user, choise);
+		stationary_telephone* resize = new stationary_telephone[choise]; // Временная структура
+		Resize(n, resize, user, choise);
 		choise -= n;
 		n += choise;
+		user = new stationary_telephone[n];
+		user = resize;
 		goto link;
 	}
 
