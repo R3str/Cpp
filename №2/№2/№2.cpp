@@ -183,6 +183,39 @@ void Resize(int n, stationary_telephone* changeUser, stationary_telephone* user,
 		cout << "Имя: ";
 		changeUser[i].name = check("string");
 		changeUser[i].name[0] = checkRegister(n, changeUser[i].name[0]);
+
+		cout << "Отчество: ";
+		changeUser[i].middle_name = check("string");
+		changeUser[i].middle_name[0] = checkRegister(n, changeUser[i].middle_name[0]);
+
+		cout << "Страна: ";
+		changeUser[i].country = check("string");
+		changeUser[i].country[0] = checkRegister(n, changeUser[i].country[0]);
+
+		cout << "Регион: ";
+		changeUser[i].region = check("string");
+		changeUser[i].region[0] = checkRegister(n, changeUser[i].region[0]);
+
+		cout << "Район: ";
+		changeUser[i].area = check("string");
+		changeUser[i].area[0] = checkRegister(n, changeUser[i].area[0]);
+
+		cout << "Город: ";
+		changeUser[i].city = check("string");
+		changeUser[i].city[0] = checkRegister(n, changeUser[i].city[0]);
+
+		cout << "Улица: ";
+		changeUser[i].street = check("string");
+		changeUser[i].street[0] = checkRegister(n, changeUser[i].street[0]);
+
+		cout << "Дом: ";
+		changeUser[i].house = atoi(check("int").c_str());
+
+		cout << "Квартира: ";
+		changeUser[i].door = atoi(check("int").c_str());
+
+		cout << "Номер телефона: ";
+		changeUser[i].telephone = atoi(check("int").c_str());
 	}
 }
 
