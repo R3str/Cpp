@@ -2,7 +2,7 @@
 #include <iostream>
 using namespace std;
 
-struct element
+struct element	//Структура со значением и адресом елемента
 {
 	int x;
 	element *Next;
@@ -18,7 +18,7 @@ public:
 	void Show();
 };
 
-List::~List()
+List::~List()	//Деструктор (освобождение памяти от списка)
 {
 	while (Head != NULL)
 	{
@@ -28,7 +28,7 @@ List::~List()
 	}
 }
 
-void List::Add(int x)
+void List::Add(int x)	//Добваление элемента в список
 {
 	element *temp = new element;
 	temp->x = x;
@@ -36,7 +36,7 @@ void List::Add(int x)
 	Head = temp;
 }
 
-void List::Show()
+void List::Show()	//Показ всего списка с корректировкой (замена след. от отрицательного элемента на значение '10')
 {
 	element *temp = Head;
 
